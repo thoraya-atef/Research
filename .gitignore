@@ -1,0 +1,36 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# appsettings local overrides (never commit real secrets)
+appsettings.*.local.json
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.DotSettings.user
+
+# Rider/VSCode
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# NuGet
+*.nupkg
+**/packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# OS files
+.DS_Store
+Thumbs.db
