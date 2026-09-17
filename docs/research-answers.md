@@ -1,25 +1,5 @@
 # ASP.NET Core Research Assignment — Research Answers (Parts 1–5, 8)
 
-This file covers Parts 1 to 5 and Part 8 only, per the "Submission requirements" section
-of the assignment PDF ("One research document containing answers, examples, and source
-links for Parts 1-5 and 8"). Part 7's comparison questions live in
-`docs/comparison-table.md` (Stage 6) because they depend on the actual, finished
-implementation of both projects. The PDF is the source of the questions only — every
-answer below is based on official Microsoft / Serilog documentation, linked under each
-question.
-
-## ⚠️ TO REVIEW
-
-- The difference between environment name and environment variable (Part 2, Q7) is my
-  own phrasing, not a direct quote from a single doc page — check it reads right to you.
-- "What information must never be written to logs" (Part 5, Q9) is based on general
-  security best practice (OWASP-style guidance), not one specific sentence in the
-  Microsoft docs — worth a second look.
-- "How does Kestrel hosting differ when IIS/Nginx/LB/ingress terminates TLS" (Part 4,
-  Q11) combines several parts of the Kestrel docs into one answer — check it covers what
-  you need.
-
----
 
 # Part 1 — User Secrets
 

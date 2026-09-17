@@ -72,4 +72,3 @@ Compliance Evidence in the README.
   Applied to the correct one via `dotnet ef database update --connection "..."`, and
   documented the gotcha in the README so it doesn't happen to anyone else.
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
