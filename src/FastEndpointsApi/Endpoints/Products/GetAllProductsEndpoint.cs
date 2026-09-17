@@ -9,6 +9,7 @@ public class GetAllProductsEndpoint(IProductService productService) : EndpointWi
     public override void Configure()
     {
         Get("/products");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(CancellationToken ct)

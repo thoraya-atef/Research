@@ -26,6 +26,7 @@ public class UpdateProductEndpoint(IProductService productService) : Endpoint<Up
     public override void Configure()
     {
         Put("/products/{id}");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(UpdateProductEndpointRequest req, CancellationToken ct)

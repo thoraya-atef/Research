@@ -20,7 +20,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // outlives its intended request scope, causing errors or stale data across requests.
 builder.Services.AddScoped<IProductService, ProductService>();
 
-builder.Services.AddFastEndpoints();
+// Explicitly include this project's own assembly. FastEndpoints' default auto-discovery
+// excludes assemblies whose name starts with "FastEndpoints" (to skip its own internal
+// assemblies), which also matches this project's name (FastEndpointsApi) and otherwise
+// leaves it with zero discovered endpoints.
+builder.Services.AddFastEndpoints(o => o.Assemblies = [typeof(Program).Assembly]);
 
 var app = builder.Build();
 

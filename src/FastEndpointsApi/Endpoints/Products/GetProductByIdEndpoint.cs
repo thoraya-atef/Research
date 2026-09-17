@@ -14,6 +14,7 @@ public class GetProductByIdEndpoint(IProductService productService) : Endpoint<G
     public override void Configure()
     {
         Get("/products/{id}");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(GetProductByIdRequest req, CancellationToken ct)

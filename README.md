@@ -27,9 +27,18 @@ For each project (`src/MinimalApi` or `src/FastEndpointsApi`):
 
 1. Set your local SQL Server connection string in User Secrets (never commit it):
    ```bash
-   cd src/MinimalApi   # or src/FastEndpointsApi
+   cd src/MinimalApi
    dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;Database=MinimalApiDb;Trusted_Connection=True;TrustServerCertificate=True;"
    ```
+   ```bash
+   cd src/FastEndpointsApi
+   dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;Database=FastEndpointsApiDb;Trusted_Connection=True;TrustServerCertificate=True;"
+   ```
+   > The database name here must match the placeholder connection string in that
+   > project's `Data/AppDbContextFactory.cs` — that factory (not your User Secret) is
+   > what `dotnet ef database update` actually targets. If you use a different database
+   > name in your User Secret, apply the migration against that name explicitly instead:
+   > `dotnet ef database update --connection "<your actual connection string>"`.
 2. Apply the migration:
    ```bash
    dotnet ef database update

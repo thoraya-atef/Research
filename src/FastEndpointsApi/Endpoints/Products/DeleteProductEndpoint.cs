@@ -13,6 +13,7 @@ public class DeleteProductEndpoint(IProductService productService) : Endpoint<De
     public override void Configure()
     {
         Delete("/products/{id}");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(DeleteProductRequest req, CancellationToken ct)

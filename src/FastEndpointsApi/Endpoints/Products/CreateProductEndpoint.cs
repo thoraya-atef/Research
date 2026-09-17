@@ -19,6 +19,7 @@ public class CreateProductEndpoint(IProductService productService) : Endpoint<Cr
     public override void Configure()
     {
         Post("/products");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(CreateProductRequest req, CancellationToken ct)
