@@ -118,7 +118,7 @@ code or the project files, so it lets you change app behavior without rebuilding
 Source: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-10.0
 
 ### 2. Who can create environment variables: the operating system, terminal, IDE, container, or cloud host?
-All four, actually: the operating system sets system-wide variables (like PATH), a
+All of them: the operating system sets system-wide variables (like PATH), a
 terminal session can set temporary ones, an IDE (such as Visual Studio) injects them via
 launchSettings.json, a container runtime (Docker) injects them via `ENV` or `docker run
 -e`, and a cloud host (such as Azure App Service) injects them through its application
@@ -136,9 +136,9 @@ Source: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration
 ### 4. How are hierarchical configuration keys represented in environment variables? Research the double underscore separator.
 `IConfiguration` normally uses a colon `:` for hierarchy (e.g.
 `ConnectionStrings:DefaultConnection`), but not every platform supports `:` in an
-environment variable name — Bash doesn't. So every platform supports the double
-underscore `__` instead, which is automatically converted to `:` when configuration is
-read:
+environment variable name — Bash doesn't. .NET supports the double underscore `__` as an
+alternative, which works on every platform and is automatically converted to `:` when
+configuration is read:
 
 ```bash
 export ConnectionStrings__DefaultConnection="Server=...;"
@@ -190,9 +190,11 @@ Source: https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=
 
 ### 10. What risks exist when sensitive values are stored directly in environment variables?
 They can show up in process listings, crash dumps, or uncontrolled logs, and any other
-process or user with access to the same machine may be able to see them. If the app
-accidentally logs the whole environment (for example while debugging), the secret leaks
-— and since it's unencrypted to begin with, there's no extra layer of protection.
+process or user with access to the same machine may be able to see them. Environment
+variables are also inherited by every child process the app spawns, so a secret is
+exposed to processes that never needed it. If the app accidentally logs the whole
+environment (for example while debugging), the secret leaks — and since it's
+unencrypted to begin with, there's no extra layer of protection.
 
 Source: https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-10.0
 
@@ -605,7 +607,8 @@ API clients — mobile apps, other services — don't always follow HTTP-to-HTTP
 the way browsers do, so sensitive data could actually be sent over HTTP before any
 redirect happens. The official recommendation is that a Web API either doesn't listen on
 HTTP at all, or closes the connection with 400 Bad Request instead of relying on
-`RequireHttpsAttribute`, which is designed for browsers, not API clients.
+`RequireHttpsAttribute`, which issues a browser-style redirect rather than blocking the
+request — designed for browsers, not API clients.
 
 Source: https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0
 
