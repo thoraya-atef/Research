@@ -15,6 +15,8 @@ Postman evidence the assignment asks for.
   table, and final recommendation.
 - [`postman/`](postman) — one Postman collection (all 5 Product operations, valid +
   invalid examples) and two environments (one per project, HTTPS `baseUrl`).
+- [`docs/postman-evidence/`](docs/postman-evidence) — screenshots proving the same
+  collection passed 14/14 against both projects (see "Postman Evidence" below).
 
 Both projects: .NET 10, EF Core with the SQL Server provider, User Secrets for the local
 connection string, Serilog (console + rolling file sink, request logging), explicit
@@ -81,6 +83,27 @@ for them. Skipping change tracking avoids the snapshot/comparison overhead per e
 which is pure cost with no benefit on a read-only path. `CreateAsync`, `UpdateAsync`, and
 `DeleteAsync` don't use it, because those genuinely need tracked entities to call
 `Add`, mutate properties, or `Remove` before `SaveChangesAsync`.
+
+## Postman Evidence
+
+The exact same Postman collection — [`postman/Product.postman_collection.json`](postman/Product.postman_collection.json),
+unmodified — was run against both projects over HTTPS, switching only the
+environment (`MinimalApi (HTTPS)` / `FastEndpointsApi (HTTPS)`). All 14 assertions
+(5 operations, valid + invalid, status codes, headers, and body shape) passed on
+both, with zero failures:
+
+![MinimalApi Postman run — 14/14 passed](docs/postman-evidence/minimalapi-run.png)
+*MinimalApi, `https://localhost:7000`*
+
+![FastEndpointsApi Postman run — 14/14 passed](docs/postman-evidence/fastendpointsapi-run.png)
+*FastEndpointsApi, `https://localhost:7040`*
+
+This is the evidence for Part 7's requirement to verify both implementations expose
+equivalent routes and behavior: one collection, no per-project request changes, same
+pass result against both. It is not a performance comparison — response times shown in
+the run include cold start and aren't a meaningful benchmark, consistent with the
+assignment's instruction not to base any conclusion on performance alone (see the
+[comparison table](docs/comparison-table.md)).
 
 ## Compliance Evidence
 
