@@ -50,7 +50,7 @@
                   "    const json = pm.response.json();",
                   "    pm.expect(json.id).to.be.a('number');",
                   "    pm.expect(json.name).to.eql('Wireless Mouse');",
-                  "    pm.collectionVariables.set('productId', json.id);",
+                  "    pm.collectionVariables.set('productId', String(json.id));",
                   "});"
                 ]
               }
