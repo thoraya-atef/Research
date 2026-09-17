@@ -26,6 +26,8 @@ var app = builder.Build();
 
 app.UseSerilogRequestLogging();
 
+// UseHttpsRedirection early, before UseFastEndpoints, so an HTTP request is redirected
+// before it reaches routing or app logic.
 app.UseHttpsRedirection();
 
 app.UseFastEndpoints();
