@@ -107,10 +107,17 @@ assignment's instruction not to base any conclusion on performance alone (see th
 
 ## Compliance Evidence
 
-No Swagger/OpenAPI package or middleware anywhere in the repo:
+The three commands below are scoped to exclude this README file itself
+(`-- . ':!README.md'`). Without that exclusion they become self-referential the moment
+this section is committed — this paragraph has to say the words "swagger" and
+"password=" to explain their absence elsewhere, which would then match its own grep on
+every future run. Scoping to the actual codebase (source, config, Postman collection,
+research doc) is what the assignment is actually asking to verify.
+
+No Swagger/OpenAPI package or middleware anywhere in the code:
 
 ```
-$ git grep -i "swagger"
+$ git grep -i "swagger" -- . ':!README.md'
 (no matches)
 ```
 
@@ -119,7 +126,7 @@ illustrative example string inside the research write-up (`User Id=...;Password=
 explaining what a *credentialed* connection string looks like — not a real secret:
 
 ```
-$ git grep -iE "password=|pwd="
+$ git grep -iE "password=|pwd=" -- . ':!README.md'
 docs/research-answers.md:`User Id=...;Password=...` explicitly — must be treated as a full secret, because it
 ```
 
@@ -128,7 +135,7 @@ match across the whole history is that same documentation line, added in the Sta
 commit:
 
 ```
-$ git log -S "Password=" --all --oneline
+$ git log -S "Password=" --all --oneline -- . ':!README.md'
 8dc2243 Stage 1: research answers for Parts 1-5 and 8 (Arabic prose, official MS/Serilog sources)
 ```
 
